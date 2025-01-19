@@ -1,0 +1,46 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guide.GuideTourRequestView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guide"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="430"
+      Title="Tour request view">
+    <StackPanel>
+
+        <DockPanel LastChildFill="False">
+            <StackPanel DockPanel.Dock="Left">
+                <Button Command="{Binding StatisticsCommand}" Content="Statistics" Margin="10"/>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Right">
+                <Button Content="🔽" Margin="10" Click="DropdownButton_Click"/>
+            </StackPanel>
+        </DockPanel>
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <ItemsControl ItemsSource="{Binding TourRequests}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10" Margin="5">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Description}" FontWeight="Bold"/>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}, {1}">
+                                            <Binding Path="Location.City"/>
+                                            <Binding Path="Location.Country"/>
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                                <TextBlock Text="{Binding StartDate, StringFormat='{}{0:dd-MM-yyyy}'}" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding EndDate, StringFormat='{}{0:dd-MM-yyyy}'}" FontWeight="Bold"/>
+                                <Button Content="View" Command="{Binding DataContext.ViewCommand, RelativeSource={RelativeSource AncestorType={x:Type Page}}}" CommandParameter="{Binding}" HorizontalAlignment="Right" Margin="0,10,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </StackPanel>
+</Page>

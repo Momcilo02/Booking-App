@@ -1,0 +1,350 @@
+﻿<UserControl x:Class="BookingApp.WPF.View.Guest.MyReservationsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+             xmlns:vm ="clr-namespace:BookingApp.WPF.ViewModel"
+             xmlns:DTO ="clr-namespace:BookingApp.DTO"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" 
+             d:DesignWidth="620"
+             Style="{StaticResource Page_Style}">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type DTO:AccommodationReservationDTO}" x:Key="Active">
+            <Border CornerRadius="5"
+        >
+                <Grid Height="160">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="270" />
+                        <ColumnDefinition Width="130" />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                        Grid.RowSpan="4"
+                        Grid.Column="0"
+                        Height="130"
+                        Margin="10"
+                        VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{Binding MainImagePath}" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding MainImagePath}" Value="{x:Null}" />
+
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Source" Value="/Resources/Images/AccommodationImagePlaceholder.png" />
+                                    </MultiDataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Margin="10"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   Foreground="{StaticResource Guest10Brush}">
+                        <Hyperlink Command="{Binding ElementName=ActiveReservationsListView, Path=DataContext.DetailsClick}"
+                                   CommandParameter="{Binding Id}"
+                                   TextDecorations="None" 
+                                   Foreground="{StaticResource Guest10Brush}">
+                            <TextBlock FontSize="16"
+                                       FontWeight="Bold"
+                                       FontFamily="/Resources/Fonts/#Rubik"
+                                       Foreground="{StaticResource Guest10Brush}"
+                                        Text="{Binding Accommodation.Name}">
+                            </TextBlock>
+                        </Hyperlink>
+                    </TextBlock>
+                    <StackPanel Grid.Row="1"
+                            Grid.Column="1" 
+                            Orientation="Horizontal" Width="auto">
+                        <Image 
+                           Source="\Resources\Images\location_pin.png"
+                           Height="20"
+                           Width="20"
+                           OpacityMask="{StaticResource GuestTextBrush}">
+
+                        </Image>
+                        <TextBlock Foreground="{StaticResource GuestTextBrush}"
+                               Margin="10"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               FontFamily="/Resources/Fonts/#Rubik"
+                               >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Accommodation.Location.City" />
+                                    <Binding Path="Accommodation.Location.Country" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2"
+                            Grid.Column="1" 
+                            Orientation="Horizontal" Width="auto">
+                        <Image Source="\Resources\Images\user_icon.png"
+                           Height="20"
+                           Width="20"
+                           OpacityMask="{StaticResource GuestTextBrush}">
+                        </Image>
+                        <TextBlock Margin="10"
+                               FontSize="14"
+                               FontWeight="Bold"
+                               FontFamily="/Resources/Fonts/#Rubik"
+                               Foreground="{StaticResource GuestTextBrush}" Text="{Binding Accommodation.MaxGuests}">
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Grid.Row="3"
+                           Grid.Column="1"
+                           Foreground="{StaticResource GuestTextBrush}"
+                           Margin="10"
+                           FontSize="14"
+                           FontFamily="/Resources/Fonts/#Rubik"
+                           >
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}Period: from {0}  to {1}">
+                                <Binding Path="StartDateString" />
+                                <Binding Path="EndDateString" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                    <Button Grid.Column="2"
+                        Grid.Row="0"
+                        Width="80"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="5"
+                        Command="{Binding ElementName=ActiveReservationsListView, Path=DataContext.CancelClick}"
+                        CommandParameter="{Binding Id}"
+                        Content="Cancel"
+                        Background="#ff0033"
+                        Foreground="{StaticResource Guest60Brush}"
+                        FontFamily="Rubik" 
+                        FontWeight="SemiBold"
+                            BorderThickness="0">
+                        
+                    </Button>
+                    <Button Grid.Column="2"
+                        Grid.Row="2"
+                        Width="110"
+                        Height="30"
+                        Grid.RowSpan="2"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Command="{Binding ElementName=ActiveReservationsListView, Path=DataContext.ChangeReservationClick}"
+                        CommandParameter="{Binding Id}"
+                        Content="Change Dates"
+                        Background="{StaticResource Guest10Brush}"
+                        Foreground="{StaticResource Guest60Brush}" 
+                        FontFamily="Rubik" 
+                        FontWeight="SemiBold"
+                        BorderThickness="0">
+                        
+                    </Button>
+                    
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type DTO:AccommodationReservationDTO}" x:Key="Past">
+            <Border CornerRadius="5"
+>
+                <Grid Height="150">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="100" />
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                Grid.RowSpan="4"
+                Grid.Column="0"
+                Height="130"
+                Margin="10"
+                VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{Binding MainImagePath}" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding MainImagePath}" Value="{x:Null}" />
+
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Source" Value="/Resources/Images/AccommodationImagePlaceholder.png" />
+                                    </MultiDataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Row="0"
+           Grid.Column="1"
+           Margin="10, 5, 5, 5"
+           FontSize="16"
+           FontWeight="Bold"
+           FontFamily="/Resources/Fonts/#Rubik"
+           Foreground="{StaticResource Guest10Brush}">
+                        <Hyperlink Command="{Binding ElementName=PastReservationsListView, Path=DataContext.DetailsPastClick}"
+                                   CommandParameter="{Binding Id}"
+           TextDecorations="None" 
+           Foreground="{StaticResource Guest10Brush}">
+    <TextBlock FontSize="16"
+               FontWeight="Bold"
+               FontFamily="/Resources/Fonts/#Rubik"
+               Foreground="{StaticResource Guest10Brush}"
+                Text="{Binding Accommodation.Name}">
+    </TextBlock>
+</Hyperlink>
+
+                    </TextBlock>
+                    <StackPanel Grid.Row="1"
+        Grid.Column="1" 
+        Orientation="Horizontal" Width="auto"
+                                >
+                        <Image 
+       Source="\Resources\Images\location_pin.png"
+       Height="20"
+       Width="20"
+       OpacityMask="{StaticResource GuestTextBrush}">
+
+                        </Image>
+                        <TextBlock Foreground="{StaticResource GuestTextBrush}"
+           Margin="10"
+           FontSize="14"
+           FontWeight="Bold"
+           FontFamily="/Resources/Fonts/#Rubik"
+           >
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} {1}">
+                                    <Binding Path="Accommodation.Location.City" />
+                                    <Binding Path="Accommodation.Location.Country" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2"
+        Grid.Column="1" 
+        Orientation="Horizontal" Width="auto">
+                        <Image Source="\Resources\Images\user_icon.png"
+       Height="20"
+       Width="20"
+       OpacityMask="{StaticResource GuestTextBrush}">
+                        </Image>
+                        <TextBlock Margin="10, 5, 5, 5"
+           FontSize="14"
+           FontWeight="Bold"
+           FontFamily="/Resources/Fonts/#Rubik"
+           Foreground="{StaticResource GuestTextBrush}" Text="{Binding Accommodation.MaxGuests}">
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Grid.Row="3"
+                   Grid.Column="1"
+                   Foreground="{StaticResource GuestTextBrush}"
+                   Margin="10, 5, 5, 5"
+                   FontSize="14"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   >
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}Period: from {0}  to {1}">
+                                <Binding Path="StartDateString" />
+                                <Binding Path="EndDateString" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                    <Button Grid.Column="2"
+                Grid.Row="2"
+                Grid.RowSpan="2"
+                Width="110"
+                Height="30"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding ElementName=PastReservationsListView, Path=DataContext.ReviewClick}"
+                CommandParameter="{Binding Id}"
+                Content="Review"
+                Background="{StaticResource Guest10Brush}"
+                Foreground="{StaticResource Guest60Brush}" 
+                FontFamily="Rubik" 
+                FontWeight="Bold"
+                            BorderThickness="0">
+                        
+                    </Button>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="0">
+        <Border Background="{StaticResource Guest60Brush}"
+    CornerRadius="20" />
+
+        <TabControl Background="{StaticResource Guest60Brush}" BorderBrush="{StaticResource Guest30Brush}">
+            <TabItem Header="Active Reservations">
+                <ListView x:Name="ActiveReservationsListView"
+                  ItemTemplate="{StaticResource Active}"
+                  Margin="10"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemsSource="{Binding ActiveReservations, UpdateSourceTrigger=PropertyChanged}"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  SelectedItem="{Binding SelectedActiveReservation}"
+                  SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="{StaticResource Guest30Brush}" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0,5,5,5" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Height" Value="150"/>
+                            
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+
+            </TabItem>
+            <TabItem Header="Past Reservations">
+                <ListView x:Name="PastReservationsListView"
+                  ItemTemplate="{StaticResource Past}"
+                  Margin="10"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  ItemsSource="{Binding PastReservations, UpdateSourceTrigger=PropertyChanged}"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  SelectedItem="{Binding SelectedPastReservation}"
+                  SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="{StaticResource Guest30Brush}" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0,5,5,5" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="Height" Value="150"/>
+
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </TabItem>
+        </TabControl>
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="BookingApp.WPF.View.Guide.CreateTourNotPossibleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.View.Guide"
+             mc:Ignorable="d" 
+             d:DesignHeight="730" d:DesignWidth="450">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="Unfortunately, creating a tour is not possible, because there are no requests in the last year."
+                       TextWrapping="Wrap"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       FontSize="24"/>
+        <Button Content="Cancel"
+                    HorizontalAlignment="Center"
+                    Margin="0,150,0,0" Height="42" Width="116" Click="CancelButton_Click"/>
+    </StackPanel>
+</UserControl>

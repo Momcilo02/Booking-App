@@ -1,0 +1,240 @@
+﻿<UserControl x:Class="BookingApp.WPF.View.Guest.GuestProfileUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="620"
+             Style="{StaticResource Page_Style}">
+    <UserControl.Resources>
+        <Style TargetType="DataGridCell" x:Name="DataColumn">
+            <Setter Property="Background" Value="{StaticResource Guest30Brush}"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Border Padding="0"
+            Height="84" Width="350" HorizontalAlignment="Left"
+             Margin="10"
+            BorderThickness="2"
+            BorderBrush="{StaticResource Guest10Brush}">
+                <Grid Height="80" Width="350" HorizontalAlignment="Left"
+          Background="{StaticResource Guest30Brush}"
+          >
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label x:Name="UsernameLabel" Content="{Binding User.Username}" Grid.Column="0" Grid.Row="0"
+               Foreground="{StaticResource GuestTextBrush}" FontSize="16" FontWeight="SemiBold" FontFamily="Rubik"></Label>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" Height="40">
+                        <Label x:Name="PasswordLabel" Foreground="{StaticResource GuestTextBrush}" Content="{Binding UserPassword}"
+                                FontSize="14" FontWeight="SemiBold" FontFamily="Rubik" VerticalAlignment="Center"></Label>
+                        <Button Foreground="{StaticResource Guest10Brush}" Command="{Binding Path=ShowPasswordClick}" Width="30" Height="30">
+                            <Image Source="\Resources\Images\showPassword.png" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            </Image>
+                        </Button>
+                        
+                    </StackPanel>
+                    <TextBlock Grid.Row="0"
+                   Grid.Column="1"
+                   Text="Super Guest"
+                   Foreground="{StaticResource Guest10Brush}"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   FontSize="18"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsSuperGuest}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <TextBlock Grid.Row="1"
+                   Grid.Column="1"
+                   Foreground="{StaticResource Guest10Brush}"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   FontSize="16"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding IsSuperGuest}" Value="True"/>
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </MultiDataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} points remaining">
+                                <Binding Path="SuperPointsRemaining" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Grid>
+            </Border>
+            <Border Margin="10" BorderBrush="{StaticResource Guest30Brush}"
+                    BorderThickness="2"
+                    Width="510"
+                    HorizontalAlignment="Left">
+                <StackPanel>
+                    <TextBlock Text="Reservation Chenge Dates Requests:"
+                               Foreground="{StaticResource GuestTextBrush}"
+                               FontSize="14"
+                               FontFamily="Rubik"
+                               Margin="5"></TextBlock>
+                    <DataGrid x:Name="RequestsDataGrid" Width="500" Height="130" HorizontalAlignment="Left" Margin="5"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              ItemsSource="{Binding Path=Requests, UpdateSourceTrigger=PropertyChanged}"
+                              Background="{StaticResource Guest30Brush}"
+                              Foreground="{StaticResource GuestTextBrush}" 
+                              >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Label Foreground="{StaticResource Guest10Brush}">
+                                            <Image Width="30" Height="30" Source="{Binding StatusImage}" OpacityMask="{StaticResource Guest10Brush}">
+
+                                            </Image>
+                                        </Label>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                        <Setter Property="Content" Value="Status"/>
+
+                                    </Style>
+                                </DataGridTemplateColumn.HeaderStyle>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="Name" Width="*" Binding="{Binding OldReservation.Accommodation.Name}" Foreground="{StaticResource GuestTextBrush}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding OwnerUsername}" Foreground="{StaticResource GuestTextBrush}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Details" Margin="5" Background="{StaticResource GuestTextBrush}"
+                                                Foreground="{StaticResource Guest60Brush}"
+                                                Command="{Binding ElementName=RequestsDataGrid, Path=DataContext.RequestDetailsClick}"
+                                                CommandParameter="{Binding Id}"
+                                                BorderThickness="0"></Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+            
+            <Border BorderBrush="{StaticResource Guest30Brush}"
+            BorderThickness="2"
+            Height="280"
+            Margin="10">
+                <Grid Margin="0"
+              Height="266">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0"
+                               Text="Review By Accommodation Owners For You:"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{StaticResource GuestTextBrush}"
+                               FontSize="14"
+                               Margin="5"
+                               FontFamily="Rubik"></TextBlock>
+                    <Button Grid.Column="1"
+                            Grid.Row="0"
+                            Margin="5"
+                            Width="170"
+                            HorizontalAlignment="Right">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="\Resources\Images\generate.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                <TextBlock Margin="5,0,0,0" Text="Generate Report" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"></TextBlock>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+                    <DataGrid Grid.Row="1" Grid.ColumnSpan="2"
+                      Margin="5"
+                      AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    SelectionMode="Single"
+                    ItemsSource="{Binding Path=GuestReviews, UpdateSourceTrigger=PropertyChanged}"
+                    Background="{StaticResource Guest30Brush}"
+                    Foreground="{StaticResource GuestTextBrush}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Foreground="{StaticResource GuestTextBrush}" Header="Accommodation" Width="*" Binding="{Binding Path=AccommodationReservation.Accommodation.Name}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Cleanliness" Width="*" Binding="{Binding Path=Cleaness}" Foreground="{StaticResource GuestTextBrush}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Correctness" Width="*" Binding="{Binding Path=Correctness}" Foreground="{StaticResource GuestTextBrush}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Owner" Width="*" Binding="{Binding Path=AccommodationReservation.Accommodation.Owner.Username}" Foreground="{StaticResource GuestTextBrush}">
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Foreground" Value="{StaticResource Guest60Brush}"></Setter>
+                                    </Style>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</UserControl>

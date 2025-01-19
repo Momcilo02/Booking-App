@@ -1,0 +1,32 @@
+﻿<Window x:Class="BookingApp.View.Guide.TourReviewsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View.Guide"
+        mc:Ignorable="d"
+        Title="Tour Reviews" Height="600" Width="480">
+    <ScrollViewer>
+        <ItemsControl ItemsSource="{Binding Reviews}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding GuideKnowledge, StringFormat='Knowledge: {0}/5'}"/>
+                            <TextBlock Text="{Binding GuideLanguage, StringFormat='Language: {0}/5'}"/>
+                            <TextBlock Text="{Binding TourInterest, StringFormat='Interest: {0}/5'}"/>
+                            <TextBlock Text="{Binding CheckPoint, StringFormat='Check point: {0}'}"/>
+                            <TextBlock Text="{Binding Comment,  StringFormat='Comment {0}'}"/>
+                            <TextBlock Text="{Binding IsValidMessage}"/>
+
+                            <StackPanel  HorizontalAlignment="Right">
+                                <Button  Width="120" Content="Report a review" Command="{Binding DataContext.ReportReviewCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding Id}" Margin="5"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</Window>

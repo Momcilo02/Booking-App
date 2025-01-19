@@ -1,0 +1,149 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+	<UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Data\accommodation_stats.csv" />
+    <None Remove="Resources\Images\AccommodationImagePlaceholder.png" />
+    <None Remove="Resources\Images\add %281%29.png" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\alps.png" />
+    <None Remove="Resources\Images\black-alert.png" />
+    <None Remove="Resources\Images\back-button.png" />
+    <None Remove="Resources\Images\clock.png" />
+    <None Remove="Resources\Images\comment.png" />
+    <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\generate.png" />
+    <None Remove="Resources\Images\guest-star-color-2.png" />
+    <None Remove="Resources\Images\guest-star-color.png" />
+    <None Remove="Resources\Images\guest-star-white.png" />
+    <None Remove="Resources\Images\guests.png" />
+
+    <None Remove="Resources\Images\home1.png" />
+
+    <None Remove="Resources\Images\info.png" />
+
+    <None Remove="Resources\Images\InProcessRequest.png" />
+
+    <None Remove="Resources\Images\kenya.png" />
+    <None Remove="Resources\Images\kyoto.png" />
+    <None Remove="Resources\Images\location_pin.png" />
+    <None Remove="Resources\Images\medal.png" />
+    <None Remove="Resources\Images\next-button.png" />
+    <None Remove="Resources\Images\NotPassword.png" />
+    <None Remove="Resources\Images\pdf-file.png" />
+    <None Remove="Resources\Images\prague.png" />
+    <None Remove="Resources\Images\RejectRequest.png" />
+    <None Remove="Resources\Images\requestApproved.png" />
+    <None Remove="Resources\Images\rome.png" />
+    <None Remove="Resources\Images\search.png" />
+    <None Remove="Resources\Images\search_wwhite.png" />
+    <None Remove="Resources\Images\showPassword.png" />
+    <None Remove="Resources\Images\stats.png" />
+    <None Remove="Resources\Images\user.png" />
+    <None Remove="Resources\Images\user_icon.png" />
+    <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\world.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\add (1).png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\alps.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\back-button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\clock.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\edit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\guests.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\home1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\kenya.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\kyoto.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\medal.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\next-button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\pdf-file.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\prague.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\rome.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\stats.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\view.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\world.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.6.0" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="OxyPlot.Wpf" Version="2.1.2" />
+    <PackageReference Include="QuestPDF" Version="2024.3.10" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Data\accommodation_stats.csv" />
+    <Resource Include="Resources\Images\AccommodationImagePlaceholder.png" />
+    <Resource Include="Resources\Images\black-alert.png" />
+    <Resource Include="Resources\Images\comment.png" />
+    <Resource Include="Resources\Images\generate.png" />
+    <Resource Include="Resources\Images\guest-star-color-2.png" />
+    <Resource Include="Resources\Images\guest-star-color.png" />
+    <Resource Include="Resources\Images\guest-star-white.png" />
+    <Resource Include="Resources\Images\InProcessRequest.png" />
+    <Resource Include="Resources\Images\location_pin.png" />
+    <Resource Include="Resources\Images\NotPassword.png" />
+    <Resource Include="Resources\Images\RejectRequest.png" />
+    <Resource Include="Resources\Images\requestApproved.png" />
+    <Resource Include="Resources\Images\search.png" />
+    <Resource Include="Resources\Images\search_wwhite.png" />
+    <Resource Include="Resources\Images\showPassword.png" />
+    <Resource Include="Resources\Images\user_icon.png" />
+  </ItemGroup>
+
+</Project>

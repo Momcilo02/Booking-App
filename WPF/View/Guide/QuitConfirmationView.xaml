@@ -1,0 +1,18 @@
+﻿<Page x:Class="BookingApp.WPF.View.Guide.QuitConfirmationView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:BookingApp.WPF.View.Guide"
+      mc:Ignorable="d" 
+      d:DesignHeight="730" d:DesignWidth="450"
+      Title="QuitConfirmationView">
+
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="Are you sure you want to quit your job?" Margin="10"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Yes" Command="{Binding QuitCommand}" Margin="10"/>
+            <Button Content="No" Command="{Binding CancelCommand}" Margin="10"/>
+        </StackPanel>
+    </StackPanel>
+</Page>

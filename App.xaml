@@ -1,0 +1,23 @@
+﻿<Application x:Class="BookingApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:BookingApp"
+             StartupUri="WPF/View/SignInForm.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/GuestPage.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/GuestImage.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/GuestButton.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/GuestText.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Styles/GuestColors.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <SolidColorBrush x:Key="GuestTextBrush" Color="{StaticResource GuestTextColor}"></SolidColorBrush>
+            <SolidColorBrush x:Key="Guest60Brush" Color="{StaticResource Guest60Color}"></SolidColorBrush>
+            <SolidColorBrush x:Key="Guest30Brush" Color="{StaticResource Guest30Color}"></SolidColorBrush>
+            <SolidColorBrush x:Key="Guest10Brush" Color="{StaticResource Guest10Color}"></SolidColorBrush>
+        </ResourceDictionary>
+        
+    </Application.Resources>
+</Application>

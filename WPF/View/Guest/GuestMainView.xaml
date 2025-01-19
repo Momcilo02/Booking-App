@@ -1,0 +1,145 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.View.Guest"
+        xmlns:DTO="clr-namespace:BookingApp.DTO" x:Class="BookingApp.View.Guest.GuestMainView"
+        xmlns:Menu="clr-namespace:BookingApp.Resources.Utilities"
+        xmlns:views="clr-namespace:BookingApp.WPF.View.Guest"
+        xmlns:vm="clr-namespace:BookingApp.WPF.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="620" 
+        Width="870"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        x:Name="MainWindow">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Alt" Key="N" Command="{Binding NavCommand}" CommandParameter="newReservations"></KeyBinding>
+        <KeyBinding Modifiers="Alt" Key="M" Command="{Binding NavCommand}" CommandParameter="myReservations"></KeyBinding>
+        <KeyBinding Modifiers="Alt" Key="P" Command="{Binding NavCommand}" CommandParameter="profile"></KeyBinding>
+        <KeyBinding Modifiers="Alt" Key="F" Command="{Binding NavCommand}" CommandParameter="forum"></KeyBinding>
+        <KeyBinding Modifiers="Alt" Key="L" Command="{Binding LogOutClick}" CommandParameter="{Binding ElementName=MainWindow}"></KeyBinding>
+    </Window.InputBindings>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:NewReservationsViewModel}">
+            <views:NewReservationsUserControl></views:NewReservationsUserControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:MyReservationsViewModel}">
+            <views:MyReservationsUserControl></views:MyReservationsUserControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:GuestProfileViewModel}">
+            <views:GuestProfileUserControl></views:GuestProfileUserControl>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:GuestForumsViewModel}">
+            <views:GuestForumUserControl></views:GuestForumUserControl>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid Margin="0">
+        <Border Background="{StaticResource Guest60Brush}"
+                 />
+
+        <Grid Margin="0">
+
+            <!--// Base Grid //-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+
+            <!--// Navigation Panel //-->
+
+            <Grid HorizontalAlignment="Left"
+                  Width="230">
+
+                <Border Background="{StaticResource Guest30Brush}"
+                        />
+
+                <StackPanel Height="600"
+                            Width="230">
+                    
+                    <!--// New Reservation //-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding NavCommand}"
+                              CommandParameter="newReservations"
+                              Margin="0,100,0,0"
+                              IsChecked="{Binding IsNewChecked}">
+                        <Grid>
+                            <!--<Image Source="Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />-->
+
+                            <TextBlock Text="New Reservation"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+                    </Menu:Btn>
+                    
+                    <!--// My Reservation //-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding NavCommand}"
+                              CommandParameter="myReservations"
+                              IsChecked="{Binding IsMyChecked}">
+                        <Grid>
+                            <!--<Image Source="Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />-->
+
+                            <TextBlock Text="My Reservation"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+                    </Menu:Btn>
+                    <!--// Forums //-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding NavCommand}"
+                              CommandParameter="forum"
+                              IsChecked="{Binding IsForumChecked}">
+                        <Grid>
+                            <!--<Image Source="Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />-->
+
+                            <TextBlock Text="Forums"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+                    </Menu:Btn>
+                    <!--// Profile //-->
+                    <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding NavCommand}"
+                              CommandParameter="profile"
+                              IsChecked="{Binding IsProfileChecked}">
+                        <Grid>
+                            <!--<Image Source="Images/img_home.png"
+                                   Style="{StaticResource Image_Style}" />-->
+
+                            <TextBlock Text="Profile"
+                                       Style="{StaticResource Text_Style}" />
+
+                        </Grid>
+                    </Menu:Btn>
+                    <Button x:Name="DemoButton"
+                            Style="{StaticResource LogOutBtn}"
+                            VerticalAlignment="Bottom" Margin="0, 180, 0, 0">
+                        <TextBlock Text="Demo"
+                                   Style="{StaticResource Text_Style}" />
+                    </Button>
+                    <Button x:Name="LogOutButton"
+                            Style="{StaticResource LogOutBtn}"
+                            VerticalAlignment="Bottom"
+                            Click="LogOutButton_Click">
+                        <TextBlock Text="Log Out"
+                                   Style="{StaticResource Text_Style}" />
+                    </Button>
+                </StackPanel>
+                
+            </Grid>
+            <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}"></ContentControl>
+            
+
+        </Grid>
+
+
+    </Grid>
+</Window>

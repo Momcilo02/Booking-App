@@ -1,0 +1,67 @@
+﻿<Window x:Class="BookingApp.WPF.View.Guest.ForumView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+        xmlns:vm="clr-namespace:BookingApp.WPF.ViewModel"
+        mc:Ignorable="d"
+        Title="ForumView" Height="600" Width="620"
+        Background="{StaticResource Guest60Brush}">
+    <Window.DataContext>
+        <vm:GuestForumsViewModel></vm:GuestForumsViewModel>
+    </Window.DataContext>
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="LocationComboBox"
+                  Grid.Column="0"
+                  Grid.Row="0"
+                  Foreground="{StaticResource GuestTextBrush}"
+                  BorderBrush="{StaticResource Guest30Brush}"
+                  Background="{StaticResource Guest30Brush}"
+                  ItemsSource="{Binding Path=Locations}"
+                  DisplayMemberPath="FullLocation"
+                  SelectedValue="{Binding Path=SelectedLocation, UpdateSourceTrigger=PropertyChanged}"
+                  Width="140"
+                  Height="30"
+                  Text="Location"
+                  ToolTip="Select Location"
+                  Margin="10, 5, 5, 5"
+                  SelectedIndex="0" FontFamily="Rubik"
+                  HorizontalAlignment="Left">
+
+        </ComboBox>
+        <Button x:Name="AddForumButton"
+                
+                Grid.Column="1"
+                Grid.Row="0"
+                Width="140"
+                Height="30"
+                HorizontalAlignment="Right"
+                Foreground="{StaticResource Guest60Brush}"
+                Margin="5,5,10,5" 
+                Background="{StaticResource Guest10Brush}"
+                Command="{Binding Path=AddForumClick}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="\Resources\Images\add.png"
+                           Width="20" Height="20" />
+                    <TextBlock Text="Start New Forum"
+                                FontSize="14"
+                               FontFamily="Rubik"></TextBlock>
+                </StackPanel>
+
+            </Button.Content>
+        </Button>
+    </Grid>
+</Window>

@@ -1,0 +1,460 @@
+﻿<UserControl x:Class="BookingApp.WPF.View.Guest.NewReservationsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:BookingApp.WPF.View.Guest"
+             xmlns:vm ="clr-namespace:BookingApp.WPF.ViewModel"
+             xmlns:DTO ="clr-namespace:BookingApp.DTO"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" 
+             d:DesignWidth="620"
+             Style="{StaticResource Page_Style}">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="TitleText">
+            <Setter Property="Foreground" Value="{StaticResource GuestTextBrush}"></Setter>
+            <Setter Property="FontFamily" Value="Rubik"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        <DataTemplate DataType="{x:Type DTO:AccommodationDTO}" x:Key="AllAccommodations">
+            <Border CornerRadius="5">
+                <Grid Height="160">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                            Grid.RowSpan="4"
+                            Grid.Column="0"
+                            Height="130"
+                            Margin="10"
+                            Width="130"
+                            VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{Binding Path=MainImagePath}" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=MainImagePath}" Value="{x:Null}" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Source" Value="/Resources/Images/AccommodationImagePlaceholder.png" />
+                                    </MultiDataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Row="0"
+                       Grid.Column="1"
+                       Margin="10"
+                       FontSize="16"
+                       FontWeight="Bold"
+                       FontFamily="/Resources/Fonts/#Rubik"
+                       Foreground="{StaticResource Guest10Brush}"
+                       HorizontalAlignment="Left">
+                <Hyperlink Command="{Binding ElementName=AccommodationsListView, Path=DataContext.DetailsClick}"
+                           CommandParameter="{Binding Id}"
+                           TextDecorations="None" 
+                           Foreground="{StaticResource Guest10Brush}">
+                    <TextBlock FontSize="16"
+                               FontWeight="Bold"
+                               FontFamily="/Resources/Fonts/#Rubik"
+                               Foreground="{StaticResource Guest10Brush}"
+                               Text="{Binding Path=Name}">
+                    </TextBlock>
+                </Hyperlink>
+            </TextBlock>
+                    <StackPanel Grid.Row="1"
+                        Grid.Column="1" 
+                        Orientation="Horizontal" Width="auto" HorizontalAlignment="Left">
+                        <Image Source="\Resources\Images\location_pin.png"
+                       Height="20"
+                       Width="20"
+                       Margin="5, 0,0,0"
+                       OpacityMask="{StaticResource GuestTextBrush}"
+                               RenderOptions.BitmapScalingMode="HighQuality">
+                        </Image>
+                        <TextBlock Foreground="{StaticResource GuestTextBrush}"
+                           Margin="5"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           FontFamily="/Resources/Fonts/#Rubik"
+                           Text="{Binding Path=MergedLocation}">
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Margin="5"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Left"
+                       FontFamily="/Resources/Fonts/#Rubik"
+                       Foreground="{StaticResource GuestTextBrush}" 
+                       Text="{Binding Path=Type}"
+                       Grid.Column="1"
+                       Grid.Row="2">
+                    </TextBlock>
+                    <StackPanel Grid.Row="3"
+                        Grid.Column="1" 
+                        Orientation="Horizontal" Width="auto"
+                                HorizontalAlignment="Left">
+                        <Image Source="\Resources\Images\user_icon.png"
+                       Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                       Width="20"
+                       Margin="5, 0,0,0"
+                       OpacityMask="{StaticResource GuestTextBrush}">
+                        </Image>
+                        <TextBlock Margin="5"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           FontFamily="/Resources/Fonts/#Rubik"
+                           Foreground="{StaticResource GuestTextBrush}" 
+                           Text="{Binding Path=MaxGuests}">
+                        </TextBlock>
+                    </StackPanel>
+                    <Button Content="Reserve"
+                    Grid.Column="2"
+                    Grid.Row="2"
+                    Width="100"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center" 
+                    Command="{Binding ElementName=AccommodationsListView, Path=DataContext.ReserveClick}"
+                    CommandParameter="{Binding Id}"
+                    Background="{StaticResource Guest10Brush}"
+                    Foreground="{StaticResource Guest60Brush}" 
+                    FontFamily="Rubik" 
+                    FontWeight="Bold" 
+                            Margin="5">
+                        <!--<Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"></Setter>
+                            </Style>
+                        </Button.Resources>-->
+                    </Button>
+                    <Border Grid.Column="2"
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+                            BorderThickness="2"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="10"
+                            BorderBrush="{StaticResource GuestTextBrush}"
+                            Width="35"
+                            Height="35">
+                        <TextBlock Text="4.5"
+                                   FontSize="20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontFamily="Rubik"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource GuestTextBrush}"></TextBlock>
+                    </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type DTO:AccommodationDTO}" x:Key="Flexible">
+            <Border CornerRadius="5">
+                <Grid Height="160">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150" />
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0"
+                    Grid.RowSpan="4"
+                    Grid.Column="0"
+                    Height="130"
+                    Margin="5"
+                    Width="130"
+                    VerticalAlignment="Center">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Setter Property="Source" Value="{Binding Path=MainImagePath}" />
+                                <Style.Triggers>
+                                    <MultiDataTrigger>
+                                        <MultiDataTrigger.Conditions>
+                                            <Condition Binding="{Binding Path=MainImagePath}" Value="{x:Null}" />
+                                        </MultiDataTrigger.Conditions>
+                                        <Setter Property="Source" Value="/Resources/Images/AccommodationImagePlaceholder.png" />
+                                    </MultiDataTrigger>
+
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                    <TextBlock Grid.Row="0"
+               Grid.Column="1"
+               Margin="5"
+               FontSize="16"
+               FontWeight="Bold"
+               FontFamily="/Resources/Fonts/#Rubik"
+               Foreground="{StaticResource Guest10Brush}"
+               HorizontalAlignment="Left">
+        <Hyperlink Command="{Binding ElementName=AccommodationsListView, Path=DataContext.DetailsClick}"
+                   CommandParameter="{Binding Id}"
+                   TextDecorations="None" 
+                   Foreground="{StaticResource Guest10Brush}">
+            <TextBlock FontSize="16"
+                       FontWeight="Bold"
+                       FontFamily="/Resources/Fonts/#Rubik"
+                       Foreground="{StaticResource Guest10Brush}"
+                       Text="{Binding Path=Name}">
+            </TextBlock>
+        </Hyperlink>
+    </TextBlock>
+                    <StackPanel Grid.Row="1"
+                Grid.Column="1" 
+                Orientation="Horizontal" Width="auto" HorizontalAlignment="Left">
+                        <Image Source="\Resources\Images\location_pin.png"
+               Height="20"
+               Width="20"
+               Margin="5, 0,0,0"
+               OpacityMask="{StaticResource GuestTextBrush}"
+                       RenderOptions.BitmapScalingMode="HighQuality">
+                        </Image>
+                        <TextBlock Foreground="{StaticResource GuestTextBrush}"
+                   Margin="5"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   Text="{Binding Path=MergedLocation}">
+                        </TextBlock>
+                    </StackPanel>
+                    <TextBlock Margin="5"
+               FontSize="14"
+               FontWeight="Bold"
+               HorizontalAlignment="Left"
+               FontFamily="/Resources/Fonts/#Rubik"
+               Foreground="{StaticResource GuestTextBrush}" 
+               Text="{Binding Path=Type}"
+               Grid.Column="1"
+               Grid.Row="2">
+                    </TextBlock>
+                    <StackPanel Grid.Row="3"
+                Grid.Column="1" 
+                Orientation="Horizontal" Width="auto"
+                        HorizontalAlignment="Left">
+                        <Image Source="\Resources\Images\user_icon.png"
+               Height="20"
+                RenderOptions.BitmapScalingMode="HighQuality"
+               Width="20"
+               Margin="5, 0,0,0"
+               OpacityMask="{StaticResource GuestTextBrush}">
+                        </Image>
+                        <TextBlock Margin="5"
+                   FontSize="14"
+                   FontWeight="Bold"
+                   FontFamily="/Resources/Fonts/#Rubik"
+                   Foreground="{StaticResource GuestTextBrush}" 
+                   Text="{Binding Path=MaxGuests}">
+                        </TextBlock>
+                    </StackPanel>
+                    <Button Content="Show All Available Dates"
+            Grid.Column="2"
+            Grid.Row="2"
+            Width="100"
+            Height="30"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center" 
+            Command="{Binding ElementName=FlexibleListView, Path=DataContext.AllAvailableDatesClick}"
+            CommandParameter="{Binding Path=Id}"
+            Background="{StaticResource Guest10Brush}"
+            Foreground="{StaticResource Guest60Brush}" 
+            FontFamily="Rubik" 
+            FontWeight="Bold" 
+                    Margin="5">
+                        <!--<Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"></Setter>
+                    </Style>
+                </Button.Resources>-->
+                    </Button>
+                    <Border Grid.Column="2"
+        Grid.Row="0"
+        Grid.RowSpan="2"
+        BorderThickness="2"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Margin="10"
+        BorderBrush="{StaticResource GuestTextBrush}"
+        Width="35"
+        Height="35">
+                        <TextBlock Text="4.5"
+               FontSize="20"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               FontFamily="Rubik"
+               FontWeight="SemiBold"
+               Foreground="{StaticResource GuestTextBrush}"></TextBlock>
+                    </Border>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid Margin="0
+          ">
+        <TabControl Background="{StaticResource Guest60Brush}">
+            <TabItem Header="All Accommodations">
+                <Grid Background="{StaticResource Guest60Brush}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Border CornerRadius="0,20,20,0">
+
+                    </Border>
+                    <StackPanel Orientation="Horizontal"
+  Width="590"
+  Height="50px"
+  VerticalAlignment="Top"
+  Grid.Row="0"
+  HorizontalAlignment="Center">
+                        <TextBox x:Name="NameTextBox"
+   Width="135px" 
+   Height="30px"
+   Margin="0, 5, 5, 5"
+   Text="{Binding AccommodationName}"/>
+                        <ComboBox x:Name="LocationComboBox"
+    ItemsSource="{Binding Path = Locations}"
+    DisplayMemberPath="FullLocation"
+    SelectedValue="{Binding Path= SelectedLocation, UpdateSourceTrigger=PropertyChanged}"
+    Width="140px"
+    Height="30px"
+    Text="Location" 
+    ToolTip="Select Location"
+    Margin="5px"
+    SelectedIndex="0">
+                        </ComboBox>
+                        <ComboBox x:Name="TypeComboBox" Width="110 px" 
+   Height="30px"
+   Margin="5px">
+                            <CheckBox x:Name="ApartmentCheckBox" Content="Apartment" IsChecked="{Binding Path=IsAppartmentChecked}"/>
+                            <CheckBox x:Name="HouseCheckBox" Content="House"
+        IsChecked="{Binding Path=IsHouseChecked}"/>
+                            <CheckBox x:Name="CottageCheckBox" Content="Cottage"
+        IsChecked="{Binding IsCottageChecked}"/>
+                        </ComboBox>
+                        <TextBox x:Name="MaxGuestsTextBox"
+   Width="50"
+   Height="30"
+   ToolTip="Write Number Of Guests"
+   Margin="5px"
+   Text="{Binding Path=MaxGuest}">
+                        </TextBox>
+                        <TextBox x:Name="LenghtOfStayTextBox"
+  Width="50"
+  Height="30"
+  ToolTip="Write the Lenght of your Stay"
+   Margin="5px"
+   Text="{Binding LengthOfStay}">
+                        </TextBox>
+                        <Button x:Name="SearchButton"
+  Width="50"
+  Height="30"
+  Margin="5, 5, 0,5"
+  Content="Search"
+  Command="{Binding Path=SearchClick}"
+  Background="{StaticResource Guest10Brush}"
+  Foreground="{StaticResource Guest60Brush}"
+  HorizontalAlignment="Right">
+
+                        </Button>
+                    </StackPanel>
+                    <ListView Grid.Row="1"
+                            x:Name="AccommodationsListView"
+                            Margin="10"
+                            Background="Transparent"
+                            ItemsSource="{Binding Path=Accommodations, UpdateSourceTrigger=PropertyChanged}"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            SelectedItem="{Binding Path=SelectedAccommodation}"
+                            SelectionMode="Single"
+                              ItemTemplate="{StaticResource AllAccommodations}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="{StaticResource Guest30Brush}" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0,5,5,5" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Height" Value="160"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Flexible Search">
+                <Grid Background="{StaticResource Guest60Brush}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="130"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Start Date:" Style="{StaticResource TitleText}" Margin="10,0,0,0"></TextBlock>
+                    <DatePicker Grid.Row="1" Grid.Column="0" Height="30" Margin="10, 5, 5,5"
+                                SelectedDate="{Binding Path=StartDate, Mode=TwoWay}"
+                                DisplayDateStart="{x:Static System:DateTime.Now}"></DatePicker>
+                    
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="End Date:" Style="{StaticResource TitleText}" Margin="5, 0, 0,0"></TextBlock>
+                    <DatePicker Grid.Row="1" Grid.Column="1" Height="30" Margin="5"
+                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay}"
+                                DisplayDateStart="{x:Static System:DateTime.Now}"></DatePicker>
+
+                    <TextBlock Grid.Row="0" Grid.Column="2" Text="Number of Guests:" Style="{StaticResource TitleText}" Margin="5,0,0,0"></TextBlock>
+                    <TextBox Margin="5" Grid.Row="1" Grid.Column="2"
+                             Text="{Binding Path= MaxGuestFlex}"></TextBox>
+
+                    <TextBlock Grid.Row="0" Grid.Column="3" Text="Length of Stay:" Style="{StaticResource TitleText}" Margin="5,0,0,0"></TextBlock>
+                    <TextBox Margin="5" Grid.Row="1" Grid.Column="3"
+                             Text="{Binding Path=LengthOfStayFlex}"></TextBox>
+
+                    <Button Grid.Column="4" Grid.Row="1" Margin="5,5 , 10, 5" Content="Search" Background="{StaticResource Guest10Brush}" Foreground="{StaticResource Guest60Brush}"
+                            Command="{Binding Path=FlexSearchClick}"></Button>
+                    <ListView Grid.Row="2"
+                              Grid.ColumnSpan="5"
+                            x:Name="FlexibleListView"
+                            Margin="10"
+                            Background="Transparent"
+                            ItemsSource="{Binding Path=FlexAccommodations, UpdateSourceTrigger=PropertyChanged}"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            SelectedItem="{Binding Path=SelectedAccommodationFlex}"
+                            SelectionMode="Single"
+                              ItemTemplate="{StaticResource Flexible}">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="{StaticResource Guest30Brush}" />
+                                <Setter Property="Padding" Value="0" />
+                                <Setter Property="Margin" Value="0,5,5,5" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                <Setter Property="Height" Value="160"></Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

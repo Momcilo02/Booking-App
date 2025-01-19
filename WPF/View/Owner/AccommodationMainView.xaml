@@ -1,0 +1,227 @@
+﻿<Window x:Class="BookingApp.WPF.View.Owner.AccommodationMainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookingApp.WPF.View.Owner"
+        mc:Ignorable="d"
+        Title="AccommodationMainView" Height="600" Width="850"
+     
+    
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Grid Margin="0">
+        <Border Background="#212529"
+                CornerRadius="20" />
+
+        <Grid Margin="0">
+
+            <!--// Base Grid //-->
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="228" />
+                <ColumnDefinition Width="422" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+
+            <!--// Navigation Panel //-->
+
+            <Grid HorizontalAlignment="Left"
+                  Width="228">
+
+                <Border Background="#272B2F"
+                        CornerRadius="20,0,0,20" />
+
+                <StackPanel Height="400"
+                            Width="228" 
+                            VerticalAlignment="Top" Margin="0,40,0,0">
+
+                    <!--// Home //-->
+
+                    <Button Height="30" Width="228" Foreground="White"  Background="#272B2F">Main</Button>
+                    <Button Height="30" Width="228" Foreground="White"  Background="#272B2F">Accommodations</Button>
+                    <Button Height="30" Width="228" Foreground="White"  Background="#272B2F">Reservations</Button>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Column="1"
+                  Grid.Row="1">
+                <Button Click="OpenAddAccommodationView_Click" Height="20" Width="40" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0">Create Accommodation</Button>
+                <ListView
+            x:Name="StudentsListView"
+            Grid.Row="1"
+            Margin="10,40,10,20"
+            Padding="0"
+            Background="Transparent"
+            BorderThickness="0"
+            ItemsSource="{Binding accommodations}"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedItem="{Binding selectedReservation}"
+            SelectionMode="Single">
+
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="White" />
+                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Margin" Value="0,5,5,5" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                        BorderBrush="Gray"
+                        BorderThickness="1"
+                        CornerRadius="5">
+                                <Grid Height="100">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Image
+                                Grid.Row="0"
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                Height="50"
+                                Margin="10"
+                                VerticalAlignment="Center">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="../../../Resources/Images/user.png" />
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+
+
+                                    <StackPanel Grid.Row="0"
+                                Grid.Column="1" Orientation="Horizontal">
+                                        <Image Source="/../../../Resources/Images/home1.png" Width="17" Height="17" ></Image>
+                                        <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="5,10,5,5"
+                                                FontSize="15"
+                                Text="{Binding Name}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="1"
+                                Grid.Column="1">
+                                        <Image Source="/../../../Resources/Images/world.png" Width="17" Height="17" ></Image>
+
+                                        <TextBlock
+                                                    FontSize="16"
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="5,10,5,5"
+                                Text="{Binding MergedLocation}" />
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="2" Grid.Column="1">
+
+                                        <TextBlock
+                               
+                              Margin="0,0,0,0"
+                                                    FontSize="16"
+                                Text="{Binding Type}"  />
+                                    </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+                                        <Image Source="/../../../Resources/Images/medal.png" Width="12" Height="12" ></Image>
+
+
+                                        
+                                        <TextBlock
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Margin="0,10,0,0"
+                                                FontSize="8"
+                                Text="{Binding MaxGuests}" />
+
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" Margin="15,0,0,0">
+
+                                        <Button
+                                x:Name="DeleteButton"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Width="30"
+                                Height="30"
+                                Margin="0,0,10,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Content="View"
+                                Cursor="Hand"
+                                Tag="{Binding}"
+                                ToolTip="Grade"
+                                            
+                                                />
+                                        <Button
+                                x:Name="DeleteBuutton"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Width="30"
+                                Height="30"
+                                Margin="0,0,10,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Content="Stats"
+                                Cursor="Hand"
+                                Tag="{Binding}"
+                                ToolTip="Grade"
+                                            Click="Stats_Clilck"
+                                                />
+                                        <Button
+                                x:Name="DeleteeBuutton"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Width="70"
+                                Height="30"
+                                Margin="0,0,10,10"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Content="Renovation"
+                                Cursor="Hand"
+                                Tag="{Binding}"
+                                ToolTip="Grade"
+                                            Click="RenovationButton_Click"
+                                                />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+               
+
+            </Grid>
+            <Grid HorizontalAlignment="Right"
+                  Width="200"
+                  Grid.Column="2">
+
+                <Border Background="#272B2F"
+                        CornerRadius="0,20,20,0" />
+
+                <StackPanel Height="400"
+                            Width="228" 
+                            VerticalAlignment="Top">
+
+                    <!--// Home //-->
+
+                    <Label Content="Activity:" FontSize="22" Margin="45,10,0,0" Foreground="White"></Label>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Grid>
+
+
+    </Grid>
+</Window>
